@@ -47,7 +47,7 @@ class Cell: UICollectionViewCell {
         return imageView
     }()
     
-    let statustextLabel: UILabel = {
+    let statusTextLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultricies mi quis hendrerit dolor magna eget."
@@ -60,6 +60,14 @@ class Cell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         return imageView
+    }()
+    
+    let numberOfLikesAndComments: UILabel = {
+        let label = UILabel()
+        label.text = "2515 Likes     1459 Comments"
+        label.textColor = .lightGray
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        return label
     }()
     
     let dividerLine: UIView = {
@@ -91,37 +99,35 @@ class Cell: UICollectionViewCell {
     func setupView() {
         backgroundColor = .white
         
-//        likeButton.backgroundColor = .red
-//        commentButton.backgroundColor = .blue
-//        shareButton.backgroundColor = .green
-        
-        
         let buttonWidth = 115
         let buttonHeight = 45
         
-        [profileImageView, nameLabel, dateLabel, locationLabel, publicStatusLabel, statustextLabel, statusImageView, dividerLine, likeButton, commentButton, shareButton].forEach { addSubview($0) }
+        [profileImageView, nameLabel, dateLabel, locationLabel, publicStatusLabel, statusTextLabel, statusImageView, numberOfLikesAndComments, dividerLine, likeButton, commentButton, shareButton].forEach { addSubview($0) }
         
         profileImageView.addAnchors(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 8, left: 8, bottom: 0, right: 0), size: .init(width: 50, height: 50))
         
-        nameLabel.addAnchors(top: topAnchor, leading: profileImageView.trailingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 8, left: 8, bottom: 0, right: 8))
+        nameLabel.addAnchors(top: topAnchor, leading: profileImageView.trailingAnchor, bottom: dateLabel.topAnchor, trailing: trailingAnchor, padding: .init(top: 8, left: 8, bottom: 0, right: 8))
         
-        dateLabel.addAnchors(top: nameLabel.bottomAnchor, leading: profileImageView.trailingAnchor, bottom: nil, trailing: locationLabel.leadingAnchor, padding: .init(top: 0, left: 8, bottom: 0, right: 8))
-
-        locationLabel.addAnchors(top: nameLabel.bottomAnchor, leading: dateLabel.trailingAnchor, bottom: nil, trailing: publicStatusLabel.leadingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 8))
+        dateLabel.addAnchors(top: nameLabel.bottomAnchor, leading: profileImageView.trailingAnchor, bottom: nil, trailing: locationLabel.leadingAnchor, padding: .init(top: 8, left: 8, bottom: 0, right: 8))
         
-        publicStatusLabel.addAnchors(top: nameLabel.bottomAnchor, leading: locationLabel.trailingAnchor, bottom: nil, trailing: nil, padding: .init(top: 3, left: 8, bottom: 0, right: 8), size: .init(width: 16, height: 16))
+        locationLabel.addAnchors(top: nameLabel.bottomAnchor, leading: dateLabel.trailingAnchor, bottom: nil, trailing: publicStatusLabel.leadingAnchor, padding: .init(top: 0, left: 8, bottom: 0, right: 8))
         
-        statustextLabel.addAnchors(top: profileImageView.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 16, left: 8, bottom: 0, right: 8))
-
-        statusImageView.addAnchors(top: statustextLabel.bottomAnchor, leading: leadingAnchor, bottom: dividerLine.topAnchor, trailing: trailingAnchor, padding: .init(top: 8, left: 8, bottom: 16, right: 8))
+        publicStatusLabel.addAnchors(top: nameLabel.bottomAnchor, leading: locationLabel.trailingAnchor, bottom: nil, trailing: nil, padding: .init(top: 4, left: 8, bottom: 0, right: 0), size: .init(width: 16, height: 16))
         
-        dividerLine.addAnchors(top: statusImageView.bottomAnchor, leading: leadingAnchor, bottom: likeButton.topAnchor, trailing: trailingAnchor, padding: .init(top: 8, left: 8, bottom: 16, right: 8), size: .init(width: frame.width, height: 1))
+        statusTextLabel.addAnchors(top: profileImageView.bottomAnchor, leading: leadingAnchor, bottom: statusImageView.topAnchor, trailing: trailingAnchor, padding: .init(top: 16, left: 8, bottom: 8, right: 8))
         
-        likeButton.addAnchors(top: dividerLine.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: commentButton.leadingAnchor, padding: .init(top: 8, left: 8, bottom: 8, right: 8), size: .init(width: buttonWidth, height: buttonHeight))
+        statusImageView.addAnchors(top: statusTextLabel.bottomAnchor, leading: leadingAnchor, bottom: numberOfLikesAndComments.topAnchor, trailing: trailingAnchor, padding: .init(top: 8, left: 8, bottom: 8, right: 8))
         
-        commentButton.addAnchors(top: likeButton.topAnchor, leading: likeButton.trailingAnchor, bottom: likeButton.bottomAnchor, trailing: shareButton.leadingAnchor, padding: .init(top: 0, left: 8, bottom: 0, right: 8), size: .init(width: buttonWidth, height: buttonHeight))
+        numberOfLikesAndComments.addAnchors(top: statusImageView.bottomAnchor, leading: leadingAnchor, bottom: dividerLine.topAnchor, trailing: trailingAnchor, padding: .init(top: 8, left: 8, bottom: 8, right: 0), size: .init(width: frame.width, height: 45))
         
-        shareButton.addAnchors(top: commentButton.topAnchor, leading: nil, bottom: commentButton.bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 8), size: .init(width: buttonWidth, height: buttonHeight))
+        dividerLine.addAnchors(top: numberOfLikesAndComments.bottomAnchor, leading: leadingAnchor, bottom: commentButton.topAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 8, bottom: 8, right: 8), size: .init(width: frame.width, height: 1))
+        
+        likeButton.addAnchors(top: commentButton.topAnchor, leading: nil, bottom: commentButton.bottomAnchor, trailing: commentButton.leadingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 8), size: .init(width: buttonWidth, height: buttonHeight))
+        
+        commentButton.addAnchors(top: dividerLine.bottomAnchor, leading: likeButton.trailingAnchor, bottom: bottomAnchor, trailing: shareButton.leadingAnchor, padding: .init(top: 8, left: 8, bottom: 8, right: 8), size: .init(width: buttonWidth, height: buttonHeight))
+        commentButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        
+        shareButton.addAnchors(top: commentButton.topAnchor, leading: commentButton.trailingAnchor, bottom: commentButton.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 8, bottom: 0, right: 0), size: .init(width: buttonWidth, height: buttonHeight))
     }
     
     required init?(coder aDecoder: NSCoder) {

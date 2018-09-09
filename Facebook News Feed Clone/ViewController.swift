@@ -8,6 +8,7 @@
 
 import UIKit
 
+public let facebookBlue = UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1.0)
 private let reuseId = "reuseID"
 
 class ViewController: UICollectionViewController {
@@ -16,6 +17,15 @@ class ViewController: UICollectionViewController {
         super.viewDidLoad()
         collectionView?.backgroundColor = UIColor(white: 0.95, alpha: 1)
         collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseId)
+        
+        setupNavBarStyles()
+    }
+    
+    func setupNavBarStyles() {
+        navigationController?.navigationBar.barTintColor = facebookBlue
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
+        navigationItem.title = "Feed"
     }
 }
 

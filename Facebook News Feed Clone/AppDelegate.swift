@@ -8,6 +8,12 @@
 
 import UIKit
 
+class LightNavBar: UINavigationController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -21,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         let layout = UICollectionViewFlowLayout()
-        window?.rootViewController = ViewController(collectionViewLayout: layout)
+        window?.rootViewController = LightNavBar(rootViewController: ViewController(collectionViewLayout: layout))
         
         return true
     }

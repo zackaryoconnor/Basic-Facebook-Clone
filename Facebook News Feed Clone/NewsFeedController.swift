@@ -11,7 +11,7 @@ import UIKit
 public let facebookBlue = UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1.0)
 private let reuseId = "reuseID"
 
-class ViewController: UICollectionViewController {
+class NewsFeedController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class ViewController: UICollectionViewController {
 }
 
 
-extension ViewController {
+extension NewsFeedController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
     }
@@ -42,7 +42,7 @@ extension ViewController {
     }
 }
 
-extension ViewController: UICollectionViewDelegateFlowLayout {
+extension NewsFeedController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 100)
     }

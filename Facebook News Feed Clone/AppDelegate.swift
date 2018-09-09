@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         let layout = UICollectionViewFlowLayout()
-        window?.rootViewController = LightNavBar(rootViewController: ViewController(collectionViewLayout: layout))
+        window?.rootViewController = LightNavBar(rootViewController: NewsFeedController(collectionViewLayout: layout))
         
         return true
     }

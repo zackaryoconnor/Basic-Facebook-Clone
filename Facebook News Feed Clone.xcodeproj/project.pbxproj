@@ -8,18 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		F32E0BC421449672004AC5C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32E0BC321449672004AC5C2 /* AppDelegate.swift */; };
-		F32E0BC621449672004AC5C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32E0BC521449672004AC5C2 /* ViewController.swift */; };
 		F32E0BCB21449674004AC5C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F32E0BCA21449674004AC5C2 /* Assets.xcassets */; };
 		F32E0BCE21449674004AC5C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F32E0BCC21449674004AC5C2 /* LaunchScreen.storyboard */; };
+		F32E0BD621449D04004AC5C2 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32E0BD521449D04004AC5C2 /* Cell.swift */; };
+		F32E0BD821449FBF004AC5C2 /* NewsFeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32E0BD721449FBF004AC5C2 /* NewsFeedController.swift */; };
+		F32E0BDA2144A57F004AC5C2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32E0BD92144A57F004AC5C2 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F32E0BC021449672004AC5C2 /* Facebook News Feed Clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Facebook News Feed Clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F32E0BC321449672004AC5C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F32E0BC521449672004AC5C2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F32E0BCA21449674004AC5C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F32E0BCD21449674004AC5C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F32E0BCF21449674004AC5C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F32E0BD521449D04004AC5C2 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		F32E0BD721449FBF004AC5C2 /* NewsFeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsFeedController.swift; path = "../../../../../../Downloads/Facebook-News-Feed-Clone-master/Facebook News Feed Clone/NewsFeedController.swift"; sourceTree = "<group>"; };
+		F32E0BD92144A57F004AC5C2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +57,9 @@
 			isa = PBXGroup;
 			children = (
 				F32E0BC321449672004AC5C2 /* AppDelegate.swift */,
-				F32E0BC521449672004AC5C2 /* ViewController.swift */,
+				F32E0BD721449FBF004AC5C2 /* NewsFeedController.swift */,
+				F32E0BD521449D04004AC5C2 /* Cell.swift */,
+				F32E0BD92144A57F004AC5C2 /* Extensions.swift */,
 				F32E0BCA21449674004AC5C2 /* Assets.xcassets */,
 				F32E0BCC21449674004AC5C2 /* LaunchScreen.storyboard */,
 				F32E0BCF21449674004AC5C2 /* Info.plist */,
@@ -131,8 +137,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F32E0BC621449672004AC5C2 /* ViewController.swift in Sources */,
 				F32E0BC421449672004AC5C2 /* AppDelegate.swift in Sources */,
+				F32E0BD821449FBF004AC5C2 /* NewsFeedController.swift in Sources */,
+				F32E0BD621449D04004AC5C2 /* Cell.swift in Sources */,
+				F32E0BDA2144A57F004AC5C2 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

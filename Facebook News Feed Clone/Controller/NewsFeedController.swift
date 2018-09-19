@@ -97,6 +97,10 @@ extension NewsFeedController: UICollectionViewDelegateFlowLayout {
         
         collectionView?.collectionViewLayout.invalidateLayout()
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
+    }
 }
 
 

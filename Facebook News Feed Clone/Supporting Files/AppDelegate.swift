@@ -8,12 +8,6 @@
 
 import UIKit
 
-class LightNavBar: UINavigationController {
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -26,8 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        let layout = UICollectionViewFlowLayout()
-        window?.rootViewController = LightNavBar(rootViewController: NewsFeedController(collectionViewLayout: layout))
+        window?.rootViewController = CustomTabBarController()
         
         return true
     }

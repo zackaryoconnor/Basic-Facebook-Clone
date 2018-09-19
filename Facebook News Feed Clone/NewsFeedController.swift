@@ -71,12 +71,6 @@ extension NewsFeedController {
         }
         return UICollectionViewCell()
     }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        collectionView?.collectionViewLayout.invalidateLayout()
-    }
 }
 
 extension NewsFeedController: UICollectionViewDelegateFlowLayout {
@@ -84,12 +78,24 @@ extension NewsFeedController: UICollectionViewDelegateFlowLayout {
         
         if let statusText = posts[indexPath.item].statusText {
             let rect = NSString(string: statusText).boundingRect(with: CGSize(width: view.frame.width, height: 1000), options: NSStringDrawingOptions.usesFontLeading.union(NSStringDrawingOptions.usesLineFragmentOrigin), attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 18, weight: .regular)], context: nil)
-
+            
             let knownHeight: CGFloat = 460
+            
+            if UIDevice.current.orientation.isPortrait {
+                return CGSize(width: view.frame.width, height: rect.height + knownHeight)
+            } else if UIDevice.current.orientation.isLandscape {
+                return CGSize(width: view.frame.width, height: rect.height + knownHeight + 12)
+            }
+            
 
-            return CGSize(width: view.frame.width, height: rect.height + knownHeight)
         }
         return CGSize(width: view.frame.width, height: 600)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        collectionView?.collectionViewLayout.invalidateLayout()
     }
 }
 

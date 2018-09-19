@@ -10,9 +10,41 @@ import UIKit
 
 class Cell: UICollectionViewCell {
     
+    var post: Post? {
+        didSet {
+            if let name = post?.name {
+                let attributedText = NSMutableAttributedString(string: name, attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 18, weight: .semibold)])
+                attributedText.append(NSAttributedString(string: "\nSeptember 3 • Las Vegas • ", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14, weight: .regular), NSAttributedStringKey.foregroundColor : UIColor(red: 155/255, green: 161/255, blue: 171/255, alpha: 1)]))
+                
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.lineSpacing = 2
+                
+                attributedText.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedText.string.characters.count))
+                
+                let attachment = NSTextAttachment()
+                attachment.image = UIImage(named: "globe_small")
+                attachment.bounds = CGRect(x: 0, y: -2, width: 12, height: 12)
+                attributedText.append(NSAttributedString(attachment: attachment))
+                
+                nameLabel.attributedText = attributedText
+            }
+            
+            if let statusText = post?.statusText {
+                statusTextLabel.text = statusText
+            }
+            
+            if let profileImageName = post?.profileImageName {
+                profileImageView.image = UIImage(named: profileImageName)
+            }
+            
+            if let statusImageName = post?.statusImageName {
+                statusImageView.image = UIImage(named: statusImageName)
+            }
+        }
+    }
+    
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "profile")
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         return imageView
@@ -20,7 +52,6 @@ class Cell: UICollectionViewCell {
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Buttermilk O'Connor"
         label.font = .systemFont(ofSize: 18, weight: .semibold)
         return label
     }()
@@ -50,14 +81,16 @@ class Cell: UICollectionViewCell {
     let statusTextLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultricies mi quis hendrerit dolor magna eget."
+//        label.backgroundColor = .red
         return label
     }()
     
     let statusImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "posted")
         imageView.contentMode = .scaleAspectFill
+        
+        imageView.backgroundColor = .orange
+        
         imageView.layer.masksToBounds = true
         return imageView
     }()
@@ -92,7 +125,6 @@ class Cell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupView()
     }
     
@@ -116,7 +148,7 @@ class Cell: UICollectionViewCell {
         
         statusTextLabel.addAnchors(top: profileImageView.bottomAnchor, leading: leadingAnchor, bottom: statusImageView.topAnchor, trailing: trailingAnchor, padding: .init(top: 16, left: 8, bottom: 8, right: 8))
         
-        statusImageView.addAnchors(top: statusTextLabel.bottomAnchor, leading: leadingAnchor, bottom: numberOfLikesAndComments.topAnchor, trailing: trailingAnchor, padding: .init(top: 8, left: 8, bottom: 8, right: 8))
+        statusImageView.addAnchors(top: statusTextLabel.bottomAnchor, leading: leadingAnchor, bottom: numberOfLikesAndComments.topAnchor, trailing: trailingAnchor, padding: .init(top: 8, left: 8, bottom: 8, right: 8), size: .init(width: frame.width, height: 250))
         
         numberOfLikesAndComments.addAnchors(top: statusImageView.bottomAnchor, leading: leadingAnchor, bottom: dividerLine.topAnchor, trailing: trailingAnchor, padding: .init(top: 8, left: 8, bottom: 8, right: 0), size: .init(width: frame.width, height: 45))
         

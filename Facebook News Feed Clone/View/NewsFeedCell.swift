@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Cell: UICollectionViewCell {
+class NewsFeedCell: UICollectionViewCell {
     
     var post: Post? {
         didSet {
@@ -107,9 +107,9 @@ class Cell: UICollectionViewCell {
         return view
     }()
     
-    let likeButton = Cell.buttonForTitle(title: "Like", imageName: "like")
-    let commentButton = Cell.buttonForTitle(title: "Comment", imageName: "comment")
-    let shareButton = Cell.buttonForTitle(title: "Share", imageName: "share")
+    let likeButton = NewsFeedCell.buttonForTitle(title: "Like", imageName: "like")
+    let commentButton = NewsFeedCell.buttonForTitle(title: "Comment", imageName: "comment")
+    let shareButton = NewsFeedCell.buttonForTitle(title: "Share", imageName: "share")
     
     static func buttonForTitle(title: String, imageName: String) -> UIButton {
         let button = UIButton()

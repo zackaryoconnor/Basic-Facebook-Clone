@@ -1,5 +1,5 @@
 //
-//  RequestsController.swift
+//  MessengerController.swift
 //  Facebook News Feed Clone
 //
 //  Created by Zackary O'Connor on 9/19/18.
@@ -8,15 +8,16 @@
 
 import UIKit
 
-class RequestsController: UIViewController {
+class MarketplaceController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .white
         
         let label: UILabel = {
             let label = UILabel()
-            label.text = "Requests Controller"
+            label.text = "Messenger Controller"
             label.font = UIFont.systemFont(ofSize: 36, weight: .bold)
             label.numberOfLines = 0
             label.textAlignment = .center

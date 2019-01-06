@@ -1,5 +1,5 @@
 //
-//  MessengerController.swift
+//  ShareController.swift
 //  Facebook News Feed Clone
 //
 //  Created by Zackary O'Connor on 1/5/19.

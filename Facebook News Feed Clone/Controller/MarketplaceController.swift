@@ -1,5 +1,5 @@
 //
-//  MessengerController.swift
+//  MarketplaceController.swift
 //  Facebook News Feed Clone
 //
 //  Created by Zackary O'Connor on 9/19/18.
@@ -9,27 +9,14 @@
 import UIKit
 
 class MarketplaceController: UIViewController {
-
+    let controllerNameLabel = Labels(title: "Marketplace Controller", color: .black, fontSize: 36, fontWeight: .bold, alignment: .center, lines: 0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        view.addSubview(controllerNameLabel)
         
-        let label: UILabel = {
-            let label = UILabel()
-            label.text = "Messenger Controller"
-            label.font = UIFont.systemFont(ofSize: 36, weight: .bold)
-            label.numberOfLines = 0
-            label.textAlignment = .center
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        
-        view.addSubview(label)
-        
-        label.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        controllerNameLabel.addAnchors(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, centerX: view.centerXAnchor, centerY: view.centerYAnchor)
     }
 }

@@ -43,63 +43,21 @@ class NewsFeedCell: UICollectionViewCell {
         }
     }
     
-    let profileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 4
-        imageView.layer.masksToBounds = true
-        return imageView
-    }()
+    let profileImageView = ImageViews(_image: nil, _cornerRadius: 25)
     
-    let nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .semibold)
-        return label
-    }()
+    let nameLabel = Labels(title: "", color: .black, fontSize: 18, fontWeight: .semibold, alignment: .left, lines: 1)
     
-    let dateLabel: UILabel = {
-        let label = UILabel()
-        label.text = "September 8"
-        label.textColor = .lightGray
-        return label
-    }()
+    let dateLabel = Labels(title: "September 8", color: .lightGray, fontSize: 16, fontWeight: .regular, alignment: .left, lines: 1)
     
-    let locationLabel: UILabel = {
-        let label = UILabel()
-        label.text = "• Las Vegas •"
-        label.textColor = .lightGray
-        return label
-    }()
+    let locationLabel = Labels(title: "• Las Vegas •", color: .lightGray, fontSize: 16, fontWeight: .regular, alignment: .left, lines: 1)
     
-    let publicStatusLabel: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "globe_small")
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.masksToBounds = true
-        return imageView
-    }()
+    let publicStatusLabel = ImageViews(_image: "globe_small", _cornerRadius: 0)
     
-    let statusTextLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        return label
-    }()
+    let statusTextLabel = Labels(title: "", color: .black, fontSize: 17, fontWeight: .regular, alignment: .left, lines: 0)
     
-    let statusImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 2
-        imageView.layer.masksToBounds = true
-        return imageView
-    }()
+    let statusImageView = ImageViews(_image: nil, _cornerRadius: 2)
     
-    let numberOfLikesAndComments: UILabel = {
-        let label = UILabel()
-        label.text = "2515 Likes     1459 Comments"
-        label.textColor = .lightGray
-        label.font = .systemFont(ofSize: 14, weight: .regular)
-        return label
-    }()
+    let numberOfLikesAndComments = Labels(title: "2515 Likes     1459 Comments", color: .black, fontSize: 14, fontWeight: .regular, alignment: .left, lines: 1)
     
     let dividerLine: UIView = {
         let view = UIView()
@@ -134,30 +92,29 @@ class NewsFeedCell: UICollectionViewCell {
         
         [profileImageView, nameLabel, dateLabel, locationLabel, publicStatusLabel, statusTextLabel, statusImageView, numberOfLikesAndComments, dividerLine, likeButton, commentButton, shareButton].forEach { addSubview($0) }
         
-        profileImageView.addAnchors(top: topAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 8, left: 8, bottom: 0, right: 0), size: .init(width: 50, height: 50))
+        profileImageView.addAnchors(top: topAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: nil, centerX: nil, centerY: nil, padding: .init(top: 8, left: 8, bottom: 0, right: 0), size: .init(width: 50, height: 50))
         
-        nameLabel.addAnchors(top: topAnchor, leading: profileImageView.trailingAnchor, bottom: dateLabel.topAnchor, trailing: trailingAnchor, padding: .init(top: 8, left: 8, bottom: 0, right: 8))
+        nameLabel.addAnchors(top: topAnchor, leading: profileImageView.trailingAnchor, bottom: dateLabel.topAnchor, trailing: trailingAnchor, centerX: nil, centerY: nil, padding: .init(top: 8, left: 8, bottom: 0, right: 8))
         
-        dateLabel.addAnchors(top: nameLabel.bottomAnchor, leading: profileImageView.trailingAnchor, bottom: nil, trailing: locationLabel.leadingAnchor, padding: .init(top: 8, left: 8, bottom: 0, right: 8))
+        dateLabel.addAnchors(top: nameLabel.bottomAnchor, leading: profileImageView.trailingAnchor, bottom: nil, trailing: locationLabel.leadingAnchor, centerX: nil, centerY: nil, padding: .init(top: 8, left: 8, bottom: 0, right: 8))
         
-        locationLabel.addAnchors(top: nameLabel.bottomAnchor, leading: dateLabel.trailingAnchor, bottom: nil, trailing: publicStatusLabel.leadingAnchor, padding: .init(top: 0, left: 8, bottom: 0, right: 8))
+        locationLabel.addAnchors(top: nameLabel.bottomAnchor, leading: dateLabel.trailingAnchor, bottom: nil, trailing: publicStatusLabel.leadingAnchor, centerX: nil, centerY: nil, padding: .init(top: 0, left: 8, bottom: 0, right: 8))
         
-        publicStatusLabel.addAnchors(top: nameLabel.bottomAnchor, leading: locationLabel.trailingAnchor, bottom: nil, trailing: nil, padding: .init(top: 4, left: 8, bottom: 0, right: 0), size: .init(width: 16, height: 16))
+        publicStatusLabel.addAnchors(top: nameLabel.bottomAnchor, leading: locationLabel.trailingAnchor, bottom: nil, trailing: nil, centerX: nil, centerY: nil, padding: .init(top: 4, left: 8, bottom: 0, right: 0), size: .init(width: 16, height: 16))
+
+        statusTextLabel.addAnchors(top: profileImageView.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: statusImageView.topAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, centerX: nil, centerY: nil, padding: .init(top: 16, left: 8, bottom: 8, right: 8))
+
+        statusImageView.addAnchors(top: statusTextLabel.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: numberOfLikesAndComments.topAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, centerX: nil, centerY: nil, padding: .init(top: 8, left: 8, bottom: 8, right: 8), size: .init(width: frame.width, height: 250))
+
+        numberOfLikesAndComments.addAnchors(top: statusImageView.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: dividerLine.topAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, centerX: nil, centerY: nil, padding: .init(top: 8, left: 8, bottom: 8, right: 0), size: .init(width: frame.width, height: 45))
+
+        dividerLine.addAnchors(top: numberOfLikesAndComments.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: commentButton.topAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, centerX: nil, centerY: nil, padding: .init(top: 0, left: 8, bottom: 8, right: 8), size: .init(width: frame.width, height: 1))
+
+        likeButton.addAnchors(top: commentButton.topAnchor, leading: nil, bottom: commentButton.bottomAnchor, trailing: commentButton.leadingAnchor, centerX: nil, centerY: nil, padding: .init(top: 0, left: 0, bottom: 0, right: 8), size: .init(width: buttonWidth, height: buttonHeight))
+
+        commentButton.addAnchors(top: dividerLine.bottomAnchor, leading: likeButton.trailingAnchor, bottom: bottomAnchor, trailing: shareButton.leadingAnchor, centerX: centerXAnchor, centerY: nil, padding: .init(top: 8, left: 8, bottom: 8, right: 8), size: .init(width: buttonWidth, height: buttonHeight))
         
-        statusTextLabel.addAnchors(top: profileImageView.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: statusImageView.topAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 16, left: 8, bottom: 8, right: 8))
-        
-        statusImageView.addAnchors(top: statusTextLabel.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: numberOfLikesAndComments.topAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 8, left: 8, bottom: 8, right: 8), size: .init(width: frame.width, height: 250))
-        
-        numberOfLikesAndComments.addAnchors(top: statusImageView.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: dividerLine.topAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 8, left: 8, bottom: 8, right: 0), size: .init(width: frame.width, height: 45))
-        
-        dividerLine.addAnchors(top: numberOfLikesAndComments.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: commentButton.topAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 0, left: 8, bottom: 8, right: 8), size: .init(width: frame.width, height: 1))
-        
-        likeButton.addAnchors(top: commentButton.topAnchor, leading: nil, bottom: commentButton.bottomAnchor, trailing: commentButton.leadingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 8), size: .init(width: buttonWidth, height: buttonHeight))
-        
-        commentButton.addAnchors(top: dividerLine.bottomAnchor, leading: likeButton.trailingAnchor, bottom: bottomAnchor, trailing: shareButton.leadingAnchor, padding: .init(top: 8, left: 8, bottom: 8, right: 8), size: .init(width: buttonWidth, height: buttonHeight))
-        commentButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        
-        shareButton.addAnchors(top: commentButton.topAnchor, leading: commentButton.trailingAnchor, bottom: commentButton.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 8, bottom: 0, right: 0), size: .init(width: buttonWidth, height: buttonHeight))
+        shareButton.addAnchors(top: commentButton.topAnchor, leading: commentButton.trailingAnchor, bottom: commentButton.bottomAnchor, trailing: nil, centerX: nil, centerY: nil, padding: .init(top: 0, left: 8, bottom: 0, right: 0), size: .init(width: buttonWidth, height: buttonHeight))
     }
     
     required init?(coder aDecoder: NSCoder) {

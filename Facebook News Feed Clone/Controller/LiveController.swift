@@ -1,5 +1,5 @@
 //
-//  RequestsController.swift
+//  LiveController.swift
 //  Facebook News Feed Clone
 //
 //  Created by Zackary O'Connor on 9/19/18.
@@ -7,28 +7,58 @@
 //
 
 import UIKit
-
 class LiveController: UIViewController {
-
+    let controllerNameLabel = Labels(title: "Live Controller", color: .black, fontSize: 36, fontWeight: .bold, alignment: .center, lines: 0)
+    
+    let tapScreenLabel = Labels(title: "(tap the screen to see animations)", color: .black, fontSize: 18, fontWeight: .regular, alignment: .center, lines: 0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+    }
+    
+    func setupView() {
         view.backgroundColor = .white
+        setupConstraints()
+        setupCurvedView()
         
-        let label: UILabel = {
-            let label = UILabel()
-            label.text = "Requests Controller"
-            label.font = UIFont.systemFont(ofSize: 36, weight: .bold)
-            label.numberOfLines = 0
-            label.textAlignment = .center
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture)))
+    }
+    
+    func setupConstraints() {
+        [controllerNameLabel, tapScreenLabel].forEach { view.addSubview($0) }
         
-        view.addSubview(label)
         
-        label.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        controllerNameLabel.addAnchors(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, centerX: view.centerXAnchor, centerY: view.centerYAnchor)
+        
+        tapScreenLabel.addAnchors(top: controllerNameLabel.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, centerX: nil, centerY: nil)
+    }
+    
+    func setupCurvedView() {
+        let curvedView = CurvedView()
+        curvedView.backgroundColor = .clear
+    }
+    
+    @objc func handleTapGesture() {
+        (0...10).forEach { (_) in
+            generateAnimatedViews()
+        }
+    }
+    
+    fileprivate func generateAnimatedViews() {
+        let image = drand48() > 0.5 ? UIImage(named: "thumbs_up") : UIImage(named: "heart")
+        let imageView = UIImageView(image: image)
+        let dimension = 20 + drand48() * 10
+        imageView.frame = CGRect(x: 0, y: 0, width: dimension, height: dimension)
+        
+        let animation = CAKeyframeAnimation(keyPath: "position")
+        animation.path = customPath().cgPath
+        animation.duration = 2 + drand48() * 3
+        animation.fillMode = kCAFillModeForwards
+        animation.isRemovedOnCompletion = false
+        //        animation.timingFunctions = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        imageView.layer.add(animation, forKey: nil)
+        
+        view.addSubview(imageView)
     }
 }

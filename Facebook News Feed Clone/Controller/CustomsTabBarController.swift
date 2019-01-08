@@ -21,26 +21,21 @@ class CustomTabBarController: UITabBarController {
         let layout = UICollectionViewFlowLayout()
         
         let newsFeedController = LightNavBar(rootViewController: NewsFeedController(collectionViewLayout: layout))
-        newsFeedController.tabBarItem.image = UIImage(named: "news_feed_icon")
-        newsFeedController.title = "News Feed"
+        newsFeedController.tabBarItem.image = UIImage(named: "news-feed-icon")
         
-        let requestsController = RequestsController()
-        requestsController.tabBarItem.image = UIImage(named: "requests_icon")
-        requestsController.title = "Requests"
+        let liveController = LiveController()
+        liveController.tabBarItem.image = UIImage(named: "facebook-live-icon")
         
-        let messengerController = MessengerController()
-        messengerController.tabBarItem.image = UIImage(named: "messenger_icon")
-        messengerController.title = "Messenger"
+        let marketplaceController = MarketplaceController()
+        marketplaceController.tabBarItem.image = UIImage(named: "market-place-icon")
         
         let notificationsController = NotificationsController()
-        notificationsController.tabBarItem.image = UIImage(named: "globe_icon")
-        notificationsController.title = "Notifications"
+        notificationsController.tabBarItem.image = UIImage(named: "notification-icon")
         
         let moreController = MoreController()
-        moreController.tabBarItem.image = UIImage(named: "more_icon")
-        moreController.title = "More"
+        moreController.tabBarItem.image = UIImage(named: "more-icon")
         
-        viewControllers = [newsFeedController, requestsController, messengerController, notificationsController, moreController]
+        viewControllers = [newsFeedController, liveController, marketplaceController, notificationsController, moreController]
         
         tabBar.isTranslucent = false
         

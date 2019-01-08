@@ -11,15 +11,6 @@ import UIKit
 public let facebookBlue = UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1.0)
 private let reuseIdentifier = "CellId"
 
-class Post {
-    var name: String?
-    var statusText: String?
-    var profileImageName: String?
-    var statusImageName: String?
-    var numLikes: Int?
-    var numComments: Int?
-}
-
 class NewsFeedController: UICollectionViewController {
     
     var posts = [Post]()
@@ -45,14 +36,38 @@ class NewsFeedController: UICollectionViewController {
         setupNavBarStyle()
         
         collectionView?.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        collectionView?.register(Cell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView?.register(NewsFeedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
     
     func setupNavBarStyle() {
-        navigationItem.title = "Feed"
         navigationController?.navigationBar.barTintColor = facebookBlue
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
+        
+        let searchBar = UITextView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 0))
+        searchBar.backgroundColor = UIColor(red: 49/255, green: 79/255, blue: 142/255, alpha: 1.00)
+        searchBar.layer.cornerRadius = 16
+        searchBar.clipsToBounds = true
+        searchBar.text = "Search"
+        searchBar.textColor = .lightGray
+        searchBar.textAlignment = .center
+        searchBar.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        searchBar.isEditable = false
+        navigationItem.titleView = searchBar
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "messenger_icon"), style: .plain, target: self, action: #selector(handleMessengerButtonPressed))
+        navigationItem.rightBarButtonItem?.tintColor = .white
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "sent-mail"), style: .plain, target: self, action: #selector(handleShareButtonPressed))
+        navigationItem.leftBarButtonItem?.tintColor = .white
+    }
+    
+    @objc func handleMessengerButtonPressed() {
+        present(MessengerController(), animated: true, completion: nil)
+    }
+    
+    @objc func handleShareButtonPressed() {
+        present(ShareController(), animated: true, completion: nil)
     }
 }
 
@@ -63,7 +78,7 @@ extension NewsFeedController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? Cell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? NewsFeedCell {
             
             cell.post = posts[indexPath.item]
             

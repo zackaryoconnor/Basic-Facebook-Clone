@@ -77,20 +77,53 @@ class NewsFeedCell: UICollectionViewCell {
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         return button
-}
+    }
+    
+    let containerView = LikeEmojisContainerView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        setupLongPressGesture()
+    }
+    
+    func setupLongPressGesture() {
+        addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress)))
+    }
+    
+    @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            handleGestureBegan(gesture: gesture)
+        } else if gesture.state == .ended {
+            containerView.removeFromSuperview()
+        }
+    }
+    
+    func handleGestureBegan(gesture: UILongPressGestureRecognizer) {
+        addSubview(containerView)
+        let pressedLocation = gesture.location(in: self)
+        let centeredX = (frame.width - containerView.frame.width) / 2
+        
+        containerView.alpha = 0
+        containerView.transform = CGAffineTransform(translationX: centeredX, y: pressedLocation.y)
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.containerView.alpha = 1
+            self.containerView.transform = CGAffineTransform(translationX: centeredX, y: pressedLocation.y - self.containerView.frame.height - 25)
+        }, completion: nil)
     }
     
     func setupView() {
         backgroundColor = .white
         
+        [profileImageView, nameLabel, dateLabel, locationLabel, publicStatusLabel, statusTextLabel, statusImageView, numberOfLikesAndComments, dividerLine, likeButton, commentButton, shareButton].forEach { addSubview($0) }
+        
+        setupConstraints()
+    }
+    
+    func setupConstraints() {
         let buttonWidth = 115
         let buttonHeight = 45
-        
-        [profileImageView, nameLabel, dateLabel, locationLabel, publicStatusLabel, statusTextLabel, statusImageView, numberOfLikesAndComments, dividerLine, likeButton, commentButton, shareButton].forEach { addSubview($0) }
         
         profileImageView.addAnchors(top: topAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: nil, centerX: nil, centerY: nil, padding: .init(top: 8, left: 8, bottom: 0, right: 0), size: .init(width: 50, height: 50))
         
@@ -101,17 +134,17 @@ class NewsFeedCell: UICollectionViewCell {
         locationLabel.addAnchors(top: nameLabel.bottomAnchor, leading: dateLabel.trailingAnchor, bottom: nil, trailing: publicStatusLabel.leadingAnchor, centerX: nil, centerY: nil, padding: .init(top: 0, left: 8, bottom: 0, right: 8))
         
         publicStatusLabel.addAnchors(top: nameLabel.bottomAnchor, leading: locationLabel.trailingAnchor, bottom: nil, trailing: nil, centerX: nil, centerY: nil, padding: .init(top: 4, left: 8, bottom: 0, right: 0), size: .init(width: 16, height: 16))
-
+        
         statusTextLabel.addAnchors(top: profileImageView.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: statusImageView.topAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, centerX: nil, centerY: nil, padding: .init(top: 16, left: 8, bottom: 8, right: 8))
-
+        
         statusImageView.addAnchors(top: statusTextLabel.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: numberOfLikesAndComments.topAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, centerX: nil, centerY: nil, padding: .init(top: 8, left: 8, bottom: 8, right: 8), size: .init(width: frame.width, height: 250))
-
+        
         numberOfLikesAndComments.addAnchors(top: statusImageView.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: dividerLine.topAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, centerX: nil, centerY: nil, padding: .init(top: 8, left: 8, bottom: 8, right: 0), size: .init(width: frame.width, height: 45))
-
+        
         dividerLine.addAnchors(top: numberOfLikesAndComments.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: commentButton.topAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, centerX: nil, centerY: nil, padding: .init(top: 0, left: 8, bottom: 8, right: 8), size: .init(width: frame.width, height: 1))
-
+        
         likeButton.addAnchors(top: commentButton.topAnchor, leading: nil, bottom: commentButton.bottomAnchor, trailing: commentButton.leadingAnchor, centerX: nil, centerY: nil, padding: .init(top: 0, left: 0, bottom: 0, right: 8), size: .init(width: buttonWidth, height: buttonHeight))
-
+        
         commentButton.addAnchors(top: dividerLine.bottomAnchor, leading: likeButton.trailingAnchor, bottom: bottomAnchor, trailing: shareButton.leadingAnchor, centerX: centerXAnchor, centerY: nil, padding: .init(top: 8, left: 8, bottom: 8, right: 8), size: .init(width: buttonWidth, height: buttonHeight))
         
         shareButton.addAnchors(top: commentButton.topAnchor, leading: commentButton.trailingAnchor, bottom: commentButton.bottomAnchor, trailing: nil, centerX: nil, centerY: nil, padding: .init(top: 0, left: 8, bottom: 0, right: 0), size: .init(width: buttonWidth, height: buttonHeight))
@@ -121,20 +154,3 @@ class NewsFeedCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

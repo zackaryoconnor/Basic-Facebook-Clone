@@ -95,7 +95,23 @@ class NewsFeedCell: UICollectionViewCell {
         if gesture.state == .began {
             handleGestureBegan(gesture: gesture)
         } else if gesture.state == .ended {
-            containerView.removeFromSuperview()
+            
+            
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                
+                let stackView = self.containerView.subviews.first
+                stackView?.subviews.forEach({ (imageView) in
+                    imageView.transform = .identity
+                })
+                
+                self.containerView.transform.translatedBy(x: 0, y: 50)
+                self.containerView.alpha = 0
+            }, completion: { (_) in
+                self.containerView.removeFromSuperview()
+            })
+            
+        } else if gesture.state == .changed {
+            handleGestureChanged(gesture: gesture)
         }
     }
     
@@ -111,6 +127,27 @@ class NewsFeedCell: UICollectionViewCell {
             self.containerView.alpha = 1
             self.containerView.transform = CGAffineTransform(translationX: centeredX, y: pressedLocation.y - self.containerView.frame.height - 25)
         }, completion: nil)
+    }
+    
+    func handleGestureChanged(gesture: UILongPressGestureRecognizer) {
+        let pressedLocation = gesture.location(in: self.containerView)
+        print(pressedLocation)
+        
+        let fixedYLocation = CGPoint(x: pressedLocation.x, y: self.containerView.frame.height / 2)
+        
+        let hitTestView = containerView.hitTest(fixedYLocation, with: nil)
+        
+        if hitTestView is UIImageView {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                
+                let stackView = self.containerView.subviews.first
+                stackView?.subviews.forEach({ (imageView) in
+                    imageView.transform = .identity
+                })
+                
+                hitTestView?.transform = CGAffineTransform(translationX: 0, y: -50)
+            }, completion: nil)
+        }
     }
     
     func setupView() {
@@ -137,7 +174,7 @@ class NewsFeedCell: UICollectionViewCell {
         
         statusTextLabel.addAnchors(top: profileImageView.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: statusImageView.topAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, centerX: nil, centerY: nil, padding: .init(top: 16, left: 8, bottom: 8, right: 8))
         
-        statusImageView.addAnchors(top: statusTextLabel.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: numberOfLikesAndComments.topAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, centerX: nil, centerY: nil, padding: .init(top: 8, left: 8, bottom: 8, right: 8), size: .init(width: frame.width, height: 250))
+        statusImageView.addAnchors(top: statusTextLabel.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: numberOfLikesAndComments.topAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, centerX: nil, centerY: nil, padding: .init(top: 8, left: 0, bottom: 8, right: 0), size: .init(width: frame.width, height: 250))
         
         numberOfLikesAndComments.addAnchors(top: statusImageView.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: dividerLine.topAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, centerX: nil, centerY: nil, padding: .init(top: 8, left: 8, bottom: 8, right: 0), size: .init(width: frame.width, height: 45))
         

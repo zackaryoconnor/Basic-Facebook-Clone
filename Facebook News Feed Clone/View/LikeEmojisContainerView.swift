@@ -22,6 +22,7 @@ class LikeEmojisContainerView: UIView {
         let arrangedSubViews = emojis.map({ (emoji) -> UIView in
             let view = UIImageView(image: emoji)
             view.layer.cornerRadius = iconHeight / 2
+            view.isUserInteractionEnabled = true
             return view
         })
         

@@ -1,2 +1,2 @@
 # Basic Facebook Clone
-A simplified version of the Facebook app.
+This is a simplified version of the Facebook app.

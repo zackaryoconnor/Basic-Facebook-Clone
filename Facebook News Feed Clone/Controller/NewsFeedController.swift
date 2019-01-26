@@ -8,15 +8,31 @@
 
 import UIKit
 
-public let facebookBlue = UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1.0)
 private let reuseIdentifier = "CellId"
 
-class NewsFeedController: UICollectionViewController {
+class NewsFeedController: UICollectionViewController, UISearchBarDelegate {
+    
+    
+    let searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.tintColor = .white
+        searchController.searchBar.barTintColor = .white
+        searchController.hidesNavigationBarDuringPresentation = false
+        
+        let textField = searchController.searchBar.value(forKey: "searchField") as? UITextField
+        textField?.textColor = UIColor.white
+        textField?.layer.cornerRadius = 18
+        textField?.clipsToBounds = true
+        
+        return searchController
+    }()
     
     var posts = [Post]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        searchController.searchBar.delegate = self
         
         let buttermilkPost = Post()
         buttermilkPost.name = "Buttermilk O'Connor"
@@ -44,16 +60,7 @@ class NewsFeedController: UICollectionViewController {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
         
-        let searchBar = UITextView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 0))
-        searchBar.backgroundColor = UIColor(red: 49/255, green: 79/255, blue: 142/255, alpha: 1.00)
-        searchBar.layer.cornerRadius = 16
-        searchBar.clipsToBounds = true
-        searchBar.text = "Search"
-        searchBar.textColor = .lightGray
-        searchBar.textAlignment = .center
-        searchBar.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        searchBar.isEditable = false
-        navigationItem.titleView = searchBar
+        navigationItem.titleView = searchController.searchBar
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "messenger_icon"), style: .plain, target: self, action: #selector(handleMessengerButtonPressed))
         navigationItem.rightBarButtonItem?.tintColor = .white

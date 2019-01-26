@@ -22,6 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.rootViewController = CustomTabBarController()
         
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = facebookDarkBlue
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).layer.cornerRadius = 18
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).clipsToBounds = true
+        
         return true
     }
 

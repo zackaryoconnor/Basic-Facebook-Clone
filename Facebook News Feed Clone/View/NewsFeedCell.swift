@@ -43,6 +43,8 @@ class NewsFeedCell: UICollectionViewCell {
         }
     }
     
+    let newsFeedController = NewsFeedController()
+    
     let profileImageView = ImageViews(_image: nil, _cornerRadius: 25)
     
     let nameLabel = Labels(title: "", color: .black, fontSize: 18, fontWeight: .semibold, alignment: .left, lines: 1)
@@ -88,7 +90,8 @@ class NewsFeedCell: UICollectionViewCell {
     }
     
     func setupLongPressGesture() {
-        addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress)))
+        likeButton.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress)))
+//        addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress)))
     }
     
     @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {

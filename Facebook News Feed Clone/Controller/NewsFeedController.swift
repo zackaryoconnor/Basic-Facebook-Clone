@@ -18,6 +18,7 @@ class NewsFeedController: UICollectionViewController, UISearchBarDelegate {
         searchController.searchBar.tintColor = .white
         searchController.searchBar.barTintColor = .white
         searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.showsCancelButton = false
         
         let textField = searchController.searchBar.value(forKey: "searchField") as? UITextField
         textField?.textColor = UIColor.white

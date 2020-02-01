@@ -91,7 +91,6 @@ class NewsFeedCell: UICollectionViewCell {
     
     func setupLongPressGesture() {
         likeButton.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress)))
-//        addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress)))
     }
     
     @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
@@ -134,7 +133,6 @@ class NewsFeedCell: UICollectionViewCell {
     
     func handleGestureChanged(gesture: UILongPressGestureRecognizer) {
         let pressedLocation = gesture.location(in: self.containerView)
-        print(pressedLocation)
         
         let fixedYLocation = CGPoint(x: pressedLocation.x, y: self.containerView.frame.height / 2)
         

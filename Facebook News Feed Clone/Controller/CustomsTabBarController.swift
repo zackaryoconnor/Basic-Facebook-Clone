@@ -38,7 +38,8 @@ class CustomTabBarController: UITabBarController {
         viewControllers = [newsFeedController, liveController, marketplaceController, notificationsController, moreController]
         
         tabBar.isTranslucent = false
-        
+        tabBar.barTintColor = .white
+
         let topBorder = CALayer()
         topBorder.frame = CGRect(x: 0, y: 0, width: 1000, height: 0.5)
         topBorder.backgroundColor = UIColor(red: 229/255, green: 231/255, blue: 235/255, alpha: 1.0).cgColor
